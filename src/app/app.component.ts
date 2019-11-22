@@ -28,12 +28,6 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initForm();
-    this.inicial = new Date('2019-10-01 00:00:00');
-    let number = 25;
-    this.actualYear = this.inicial.getFullYear();
-    this.actualMonth = this.inicial.getMonth();
-    this.final = this.addDays(new Date(this.inicial.getTime()), number);
-    this.paintCalendar(this.inicial, this.final);
   }
 
   public initForm() {
@@ -43,6 +37,7 @@ export class AppComponent implements OnInit {
       countryCode: [null, [Validators.required]],
     });
   }
+
   public firtsDay(date: Date): Date {
     date.setDate(date.getDate() + 1 - date.getDate());
     return date;
@@ -59,29 +54,78 @@ export class AppComponent implements OnInit {
     return date;
   }
 
+  public setValuesCalendar(firts: Date): void {
+    if (this.actualMonth === this.final.getMonth() && this.actualYear === this.final.getFullYear()) {
+      this.paintCalendar(firts, this.final);
+    } else {
+      this.paintCalendar(firts, this.lastDay(new Date(this.firtsDay(new Date(firts.getTime())).getTime())));
+    }
+  }
+
   public paintCalendar(firts: Date, last: Date): void {
     this.calendarSheet = [];
     const firstDayMonth = this.firtsDay(new Date(firts.getTime()));
     let day = 1;
     for (let weeks = 0; weeks < 6; weeks++) {
-      const arrayDays = [];
+      const arrayDays: Array<Day> = [];
       for (let indexDays = 0; indexDays < 7; indexDays++) {
         if ((weeks === 0 && indexDays === firstDayMonth.getDay() || (day > 1 && day <= last.getDate()))) {
           if (firts.getDate() > day) {
-            arrayDays.push('D');
+            const newDay = { number: null, type: null };
+            arrayDays.push(newDay);
           } else {
-            arrayDays.push(day);
+            const newDay = { number: day, type: null };
+            arrayDays.push(newDay);
           }
           day++;
         } else {
-          arrayDays.push('D');
+          const newDay = { number: null, type: null };
+          arrayDays.push(newDay);
         }
       }
       this.calendarSheet.push(arrayDays);
     }
   }
 
+  public next() {
+    if (this.actualYear < this.final.getFullYear()) {
+      if (this.actualMonth < 11) {
+        this.actualMonth++;
+      } else {
+        this.actualMonth = 0;
+        this.actualYear++;
+      }
+    } else {
+      if (this.actualMonth < this.final.getMonth()) {
+        this.actualMonth++;
+      } else {
+        return;
+      }
+    }
+    this.setValuesCalendar(new Date(String(this.actualYear + '-' + (this.actualMonth + 1) + '-' + '01' + ' 00:00:00')));
+  }
 
+  public back() {
+    if (this.actualYear > this.inicial.getFullYear()) {
+      if (this.actualMonth > 0) {
+        this.actualMonth--;
+      } else {
+        this.actualMonth = 11;
+        this.actualYear--;
+      }
+    } else {
+      if (this.actualMonth > this.inicial.getMonth()) {
+        this.actualMonth--;
+      } else {
+        return;
+      }
+    }
+    if (this.actualMonth === this.inicial.getMonth() && this.actualYear === this.inicial.getFullYear()) {
+      this.setValuesCalendar(new Date(this.inicial));
+    } else {
+      this.setValuesCalendar(new Date(String(this.actualYear + '-' + (this.actualMonth + 1) + '-' + '01' + ' 00:00:00')));
+    }
+  }
   public format(event) {
     if (event) {
       if (event.day && event.month && event.year) {
@@ -91,6 +135,15 @@ export class AppComponent implements OnInit {
   }
 
   public generate() {
-    console.log(this.form.value);
+    if (this.form.valid) {
+      this.inicial = this.form.value.inicialDate;
+      this.actualYear = this.inicial.getFullYear();
+      this.actualMonth = this.inicial.getMonth();
+      this.final = this.addDays(new Date(this.inicial.getTime()), parseInt(this.form.value.numberOfDays));
+      this.setValuesCalendar(new Date(this.inicial));
+    } else {
+      this.inicial = null;
+    }
   }
+
 }

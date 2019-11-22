@@ -35,47 +35,51 @@
       </div>
     </div>
   </form>
-  <div class="table-responsive mt-5 mx-auto" style="width: 500px; height: 500px;">
-    <table class="table align-items-center table-bordered">
-      <thead class="thead-light">
-        <tr>
-          <th colspan="7" class="text-center">year: {{actualYear}}</th>
-        </tr>
-        <tr>
-          <th colspan="7" class="text-center">Month: {{actualMonth +1}}</th>
-        </tr>
-        <tr>
-          <th scope="col" class="text-center">Su</th>
-          <th scope="col" class="text-center">Mo</th>
-          <th scope="col" class="text-center">Tu</th>
-          <th scope="col" class="text-center">We</th>
-          <th scope="col" class="text-center">Th</th>
-          <th scope="col" class="text-center">Fr</th>
-          <th scope="col" class="text-center">Sa</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let arrayDays of calendarSheet">
-          <td *ngFor="let day of arrayDays" class="text-center">{{day}}</td>
-        </tr>
-        <tr>
-          <td colspan="3">
-            <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-primary">
-                Back
-              </button>
-            </div>
-          </td>
-          <td></td>
-          <td colspan="3">
-            <div class="d-flex justify-content-center">
-              <button type="submit" class="btn btn-primary">
-                Next
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <ng-template [ngIf]="inicial">
+
+    <div class="table-responsive mt-5 mx-auto" style="width: 500px; height: 500px;">
+      <table class="table align-items-center table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th colspan="7" class="text-center">year: {{actualYear}}</th>
+          </tr>
+          <tr>
+            <th colspan="7" class="text-center">Month: {{actualMonth +1}}</th>
+          </tr>
+          <tr>
+            <th scope="col" class="text-center">Su</th>
+            <th scope="col" class="text-center">Mo</th>
+            <th scope="col" class="text-center">Tu</th>
+            <th scope="col" class="text-center">We</th>
+            <th scope="col" class="text-center">Th</th>
+            <th scope="col" class="text-center">Fr</th>
+            <th scope="col" class="text-center">Sa</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let arrayDays of calendarSheet">
+            <td *ngFor="let day of arrayDays"
+              class="text-center"> {{day.number? day.number : '' }}</td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary" (click)="back()">
+                  Back
+                </button>
+              </div>
+            </td>
+            <td></td>
+            <td colspan="3">
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-primary" (click)="next()">
+                  Next
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-template>
 </div>
