@@ -29,10 +29,30 @@
     </div>
     <div class="row">
       <div class="col-12 d-flex justify-content-center">
-        <button class="btn btn-primary" (click)="prueba()">
+        <button class="btn btn-primary" (click)="generate()">
           submit
         </button>
       </div>
     </div>
   </form>
+  <div class="table-responsive mt-5 mx-auto" style="width: 500px; height: 500px;">
+    <table class="table align-items-center table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col" class="text-center">Su</th>
+          <th scope="col" class="text-center">Mo</th>
+          <th scope="col" class="text-center">Tu</th>
+          <th scope="col" class="text-center">We</th>
+          <th scope="col" class="text-center">Th</th>
+          <th scope="col" class="text-center">Fr</th>
+          <th scope="col" class="text-center">Sa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let arrayDays of calendarSheet">
+          <td *ngFor="let day of arrayDays" class="text-center">{{day}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

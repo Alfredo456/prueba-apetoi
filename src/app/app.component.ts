@@ -12,6 +12,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   title = 'prueba-apetoi';
+  public calendarSheet: Array<any> = [];
+  public actualYear: number;
+  public actualMonth: number;
+  public final: Date;
+  public inicial: Date;
   public fromDate: NgbDateStruct;
   public form: FormGroup;
 
@@ -22,6 +27,11 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initForm();
+    this.inicial = new Date('2019-10-01 00:00:00');
+    let number = 45;
+    this.actualYear = this.inicial.getFullYear();
+    this.actualMonth = this.inicial.getMonth();
+    this.final = this.addDays(new Date(this.inicial.getTime()), number);
   }
 
   public initForm() {
@@ -32,6 +42,12 @@ export class AppComponent implements OnInit {
     });
   }
 
+  public addDays(date: Date, day: number): Date {
+    date.setDate(date.getDate() + day);
+    return date;
+  }
+
+
   public format(event) {
     if (event) {
       if (event.day && event.month && event.year) {
@@ -40,7 +56,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  public prueba() {
+  public generate() {
     console.log(this.form.value);
   }
 }
