@@ -1,0 +1,20 @@
+.Invalid {
+  background-color: gray;
+}
+
+.Weekdays {
+  background-color: green;
+}
+
+.Weekends {
+  background-color: yellow;
+}
+
+.Holiday {
+  background-color: orange;
+}
+
+
+.hovering:hover {
+  background-color: red;
+}

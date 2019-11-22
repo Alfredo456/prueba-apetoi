@@ -37,7 +37,7 @@
   </form>
   <ng-template [ngIf]="inicial">
 
-    <div class="table-responsive mt-5 mx-auto" style="width: 500px; height: 500px;">
+    <div class="table-responsive mt-5 mx-auto" style="width: 550px; height: 550px;">
       <table class="table align-items-center table-bordered">
         <thead class="thead-light">
           <tr>
@@ -59,7 +59,8 @@
         <tbody>
           <tr *ngFor="let arrayDays of calendarSheet">
             <td *ngFor="let day of arrayDays"
-              class="text-center"> {{day.number? day.number : '' }}</td>
+              [ngClass]="{'Invalid': day.type==='Invalid', 'Weekends': day.type==='Weekends', 'Weekdays': day.type==='Weekdays', 'Holiday': day.type==='Holiday'}"
+              class="text-center hovering"> {{day.number? day.number : '' }}</td>
           </tr>
           <tr>
             <td colspan="3">
