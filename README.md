@@ -1,27 +1,19 @@
 # PruebaApetoi
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
+## A list of any requirements you could not implement.
 
-## Development server
+1. Falto tratamiento para los posibles mensajes de error del API.
+2. No se si el factor extra era solo que se cambiara de color al hacer hover sobre un item del calendario. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Bugs you’ve identified but didn’t have time to fix.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. El año que se le manda al api es 2018 no 2008 pero esto es porque sino mando este año me dice que mi suscripcion no tiene acepsos a otros años.
 
-## Build
+## Things you would do if you had more time to complete the task. 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+1. Aunque el calendario no se mostrara si no llenas el formulario no se muestra mensajes de error ni nada que haga entrar en razon al usuario de la obligatoriedad de llenar los campos. 
+2. la unica validacion del campo codigo de pais es que es obligatorio.
+3. se me ocurre agregar un toolStip en las fechas feriadas que diga lo que se celebra. 
 
-## Running unit tests
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
